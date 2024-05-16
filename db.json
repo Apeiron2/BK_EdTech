@@ -1,20 +1,5 @@
 {
-  "level_1": [
-    {
-      "câu hỏi": "Chọn chữ cái bạn thích",
-      "đáp án": "d"
-    }
-  ],
-  "level_2": [
-    {
-      "câu hỏi": "Chọn chữ cái bạn thích",
-      "đáp án": "d"
-    }
-  ],
-  "level_3": [
-    {
-      "câu hỏi": "Chọn chữ cái bạn thích",
-      "đáp án": "d"
-    }
-  ]
+  "level_1": ["1+2", "2+3", "3+4", "4+5"],
+  "level_2": ["2-1", "6-5"],
+  "level_3": ["6-1+3"]
 }

@@ -144,9 +144,15 @@
       "variables": [
         {
           "folded": true,
-          "name": "db",
-          "type": "string",
-          "value": "[   {     \"question\": \"Chọn chữ cái bạn thích\",     \"answers\": [       \"a\",       \"b\",       \"c\",       \"d\"     ],     \"correct\": 0,     \"level\": 0   } ]"
+          "name": "questions",
+          "type": "array",
+          "children": []
+        },
+        {
+          "folded": true,
+          "name": "answers",
+          "type": "array",
+          "children": []
         }
       ],
       "instances": [
@@ -428,19 +434,31 @@
             {
               "type": "BuiltinCommonInstructions::JsCode",
               "inlineCode": [
-                "const fs=require(\"fs\");",
-                "const path=require(\"path\");",
-                "fs.readFile('path/to/file.txt', 'utf8', (err, data) => {",
-                "    if (err) {",
-                "        console.error(err);",
-                "        return;",
-                "    }",
-                "    console.log(data);",
-                "});",
+                "const fs = require(\"fs\");",
+                "const path = require(\"path\");",
                 "",
-                "const text_1=runtimeScene.getObjects(\"Question_1\")[0]",
+                "const data = fs.readFileSync(__dirname + \"/db.json\", 'utf8');",
                 "",
-                "console.log(objects[0].setText(db[0].question))"
+                "const questions = runtimeScene.getVariables().get(\"questions_2\")",
+                "",
+                "console.log(\"Trước khi set: \")",
+                "console.log(questions)",
+                "",
+                "const setData = async () => {",
+                "    const _data=JSON.parse(data)",
+                "    await questions.fromJSObject(_data)",
+                "    const levels=questions.getAllChildren();",
+                "    Object.keys(levels).forEach(async (key)=>{",
+                "        await levels[key].fromJSObject(_data[key])",
+                "    })",
+                "    console.log(\"Sau khi set: \")",
+                "    console.log(questions)",
+                "}",
+                "setData()",
+                "const object=runtimeScene.getObjects(\"Question_1\")[0]",
+                "object.setText(eval(\"1+2+5-4\").toString())",
+                "console.log(object)",
+                ""
               ],
               "parameterObjects": "Question_1",
               "useStrict": true,
