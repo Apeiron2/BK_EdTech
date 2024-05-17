@@ -1888,6 +1888,39 @@
           "name": "Check",
           "type": "number",
           "value": 3
+        },
+        {
+          "name": "Level",
+          "type": "array",
+          "children": [
+            {
+              "folded": true,
+              "type": "number",
+              "value": 1
+            },
+            {
+              "type": "number",
+              "value": 1
+            },
+            {
+              "type": "number",
+              "value": 2
+            },
+            {
+              "type": "number",
+              "value": 2
+            },
+            {
+              "type": "number",
+              "value": 3
+            }
+          ]
+        },
+        {
+          "folded": true,
+          "name": "Count",
+          "type": "number",
+          "value": 0
         }
       ],
       "instances": [
@@ -2176,8 +2209,8 @@
           "layer": "",
           "name": "Timer",
           "persistentUuid": "754ac5e9-e061-4553-8b44-635e2aa85186",
-          "width": 251,
-          "x": 837,
+          "width": 496,
+          "x": 715,
           "y": 499,
           "zOrder": 10,
           "numberProperties": [],
@@ -2383,7 +2416,7 @@
           "behaviors": [],
           "string": "Question 2",
           "font": "",
-          "textAlignment": "left",
+          "textAlignment": "center",
           "characterSize": 80,
           "color": {
             "b": 0,
@@ -2406,7 +2439,7 @@
             "underlined": false,
             "text": "Question 2",
             "font": "",
-            "textAlignment": "left",
+            "textAlignment": "center",
             "characterSize": 80,
             "color": "0;0;0"
           }
@@ -2465,7 +2498,7 @@
           "behaviors": [],
           "string": "Question 4",
           "font": "",
-          "textAlignment": "left",
+          "textAlignment": "center",
           "characterSize": 80,
           "color": {
             "b": 0,
@@ -2488,7 +2521,7 @@
             "underlined": false,
             "text": "Question 4",
             "font": "",
-            "textAlignment": "left",
+            "textAlignment": "center",
             "characterSize": 80,
             "color": "0;0;0"
           }
@@ -2969,7 +3002,7 @@
                   },
                   "parameters": [
                     "",
-                    "3",
+                    "Variable(Level[Variable(Count)])",
                     ""
                   ]
                 },
@@ -3213,7 +3246,7 @@
                   "parameters": [
                     "Start",
                     "=",
-                    "3"
+                    "4"
                   ]
                 },
                 {
@@ -3223,7 +3256,7 @@
                   "parameters": [
                     "Timer",
                     "=",
-                    "10"
+                    "2"
                   ]
                 },
                 {
@@ -3249,11 +3282,32 @@
                 },
                 {
                   "type": {
+                    "value": "ModVarScene"
+                  },
+                  "parameters": [
+                    "Count",
+                    "+",
+                    "1"
+                  ]
+                },
+                {
+                  "type": {
                     "value": "ResetTimer"
                   },
                   "parameters": [
                     "",
                     "\"start\""
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "TextContainerCapability::TextContainerBehavior::SetValue"
+                  },
+                  "parameters": [
+                    "Timer",
+                    "Text",
+                    "=",
+                    "\"Chuẩn bị\""
                   ]
                 }
               ],
@@ -3265,11 +3319,38 @@
                     "    const question = runtimeScene.getObjects(`Question${i}`)[0]",
                     "    question.setText(`?`)",
                     "}",
-                    ""
+                    "console.log(runtimeScene.getVariables().get(\"Count\").getValue())"
                   ],
                   "parameterObjects": "",
                   "useStrict": true,
                   "eventsSheetExpanded": false
+                },
+                {
+                  "type": "BuiltinCommonInstructions::Standard",
+                  "conditions": [
+                    {
+                      "type": {
+                        "value": "VarScene"
+                      },
+                      "parameters": [
+                        "Count",
+                        ">",
+                        "4"
+                      ]
+                    }
+                  ],
+                  "actions": [
+                    {
+                      "type": {
+                        "value": "ModVarScene"
+                      },
+                      "parameters": [
+                        "Count",
+                        "=",
+                        "0"
+                      ]
+                    }
+                  ]
                 }
               ]
             }
